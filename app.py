@@ -795,7 +795,7 @@ with col1:
 
     investment = st.number_input(
         "Inversión Inicial",
-        value=500000
+        value=100000
     )
 
     # MÁS REALISTA
@@ -805,11 +805,11 @@ with col1:
     )
 
     volatility = st.slider(
-        "Volatilidad",
-        0.1,
-        1.0,
-        0.4
-    )
+    "Volatilidad",
+    0.1,
+    1.0,
+    0.81
+)
 
 with col2:
 
