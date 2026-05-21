@@ -878,8 +878,8 @@ max_expansion_budget = st.number_input(
     "Presupuesto máximo expansión",
     min_value=10000,
     max_value=5000000,
-    value=200000,
-    step=50000
+    value=50000,
+    step=10000
 )
 
 # =========================================================
