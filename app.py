@@ -45,32 +45,64 @@ SIMULATIONS = 10000
 # DESCARGA DE DATOS
 # =========================================================
 
-@st.cache_data
+@st.cache_data(ttl=3600)
 def download_data(ticker):
 
-    data = yf.download(
-        ticker,
-        period="2y",
-        auto_adjust=True,
-        progress=False
-    )
+    try:
 
-    if data.empty:
-        raise ValueError(f"No se encontraron datos para {ticker}")
+        data = yf.download(
+            ticker,
+            period="2y",
+            auto_adjust=True,
+            progress=False,
+            threads=False
+        )
 
-    if isinstance(data.columns, pd.MultiIndex):
-        data.columns = data.columns.get_level_values(0)
+        if data is None or data.empty:
 
-    data = data[["Close"]].dropna()
+            st.warning(
+                f"No se pudieron descargar datos para {ticker}"
+            )
 
-    data["Returns"] = np.log(
-        data["Close"] / data["Close"].shift(1)
-    )
+            return None
 
-    data = data.dropna()
+        if isinstance(data.columns, pd.MultiIndex):
 
-    return data
+            data.columns = data.columns.get_level_values(0)
 
+        if "Close" not in data.columns:
+
+            st.warning(
+                f"No existe columna Close para {ticker}"
+            )
+
+            return None
+
+        data = data[["Close"]].dropna()
+
+        if len(data) < 30:
+
+            st.warning(
+                f"No hay suficientes datos para {ticker}"
+            )
+
+            return None
+
+        data["Returns"] = np.log(
+            data["Close"] / data["Close"].shift(1)
+        )
+
+        data = data.dropna()
+
+        return data
+
+    except Exception as e:
+
+        st.error(
+            f"Error descargando {ticker}: {e}"
+        )
+
+        return None
 
 # =========================================================
 # GBM
