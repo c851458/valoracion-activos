@@ -826,7 +826,7 @@ with col2:
         "Pasos del árbol",
         3,
         10,
-        5
+        4
     )
 
 # =========================================================
@@ -839,7 +839,7 @@ EXPAND_THRESHOLD = st.slider(
     "Umbral para EXPANDIR",
     min_value=1.8,
     max_value=4.0,
-    value=2.5,
+    value=3.9,
     step=0.1
 )
 
@@ -847,7 +847,7 @@ EXECUTE_THRESHOLD = st.slider(
     "Umbral para EJECUTAR",
     min_value=1.1,
     max_value=2.0,
-    value=1.35,
+    value=1.60,
     step=0.05
 )
 
@@ -855,7 +855,7 @@ WAIT_THRESHOLD = st.slider(
     "Umbral para ESPERAR",
     min_value=0.8,
     max_value=1.2,
-    value=1.0,
+    value=1.05,
     step=0.05
 )
 
@@ -863,7 +863,7 @@ REDUCE_THRESHOLD = st.slider(
     "Umbral para REDUCIR",
     min_value=0.4,
     max_value=0.9,
-    value=0.75,
+    value=0.4,
     step=0.05
 )
 
@@ -871,7 +871,7 @@ EXPANSION_GAIN = st.slider(
     "Ganancia por expansión",
     0.05,
     0.40,
-    0.15
+    0.12
 )
 
 max_expansion_budget = st.number_input(
@@ -879,7 +879,7 @@ max_expansion_budget = st.number_input(
     min_value=10000,
     max_value=5000000,
     value=200000,
-    step=10000
+    step=50000
 )
 
 # =========================================================
